@@ -78,37 +78,18 @@
 
 
 
-          var names =[]
-            for (i = 0; i < bardata.length; i++){
-            names.push(bardata[i].Name)
-          }; 
-          console.log(names)
-
-          var Locations =[]
-            for (i = 0; i < bardata.length; i++){
-            Locations.push(bardata[i].Location)
-          }; 
-          console.log(Locations)
-
-          var imgs =[]
-            for (i = 0; i < bardata.length; i++){
-            imgs.push(bardata[i].img)
-          }; 
-          console.log(imgs)
-
-
 </script>
 
     <ion-pane ng-controller="CardsCtrl">
       <ion-header-bar class="bar-transparent">
-        <h1 class="Title">Find a bar near you! Swipe down if you don't like what you see.</h1>
+        <h1 class="Title">BARTENDER.</h1>
       </ion-header-bar>
 
       <swipe-cards on-swipe="onSwipe($event)">
 
       <swipe-cards>
         <swipe-card on-swipe="cardSwiped()" id="start-card">
-          Swipe down for a new card
+          Swipe down for a new bar near you
         </swipe-card>
         <swipe-card ng-repeat="card in cards" on-destroy="cardDestroyed($index)" on-swipe="cardSwiped($index)">
 
@@ -119,12 +100,21 @@
             <div class="img">
               <img ng-src="{{card.img}}">
             </div>
-
+            <div class = "Description">
+              {{card.Description}}
+              </div>
+            <div class = "Location">
+            {{card.Location}}
+            </div>
+            <div class = "Opening hours">
+            {{card['Opening hours']}}
+            </div>
+          </div>
             <!-- UNNECESSARY BUTTONS
             <div class="button-bar">
               <button class="button button-clear button-positive" ng-click="goAway()">Answer</button>
               <button class="button button-clear button-positive" ng-click="goAway()">Decline</button>
-            </div>
+            
           </div>
         </swipe-card>
       </swipe-cards>
