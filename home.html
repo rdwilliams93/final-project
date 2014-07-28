@@ -20,47 +20,28 @@
 
 <!--script.js-->
   <script> 
+angular.module('starter', ['ionic', 'ionic.contrib.ui.cards'])
 
-
-
-
-    angular.module('starter', ['ionic', 'ionic.contrib.ui.cards'])
-
-.directive('noScroll', function($document) {
-
-  return {
-    restrict: 'A',
-    link: function($scope, $element, $attr) {
-
-      $document.on('touchmove', function(e) {
-        e.preventDefault();
-      });
-    }
-  };
+    .directive('noScroll', function($document) {
+        return {
+            restrict: 'A',
+            link: function($scope, $element, $attr) {
+                $document.on('touchmove', function(e) {
+                    e.preventDefault();
+          });
+    }};
 })
 
 
 
 .controller('CardsCtrl', function($scope, $ionicSwipeCardDelegate) {
- 
-
-  var cardTypes = bardata; /*[
-    
-    { Name: 'Shit bar', img: 'http://www.fluidnetwork.co.uk/gfx/venues/18964/grand-union-bar-camden-london-pub-burgers-beer-1.jpg' },
-    { Name: 'Even shitter bar?', img: 'http://www.ecenglish.com/blogs/London/wp-content/uploads/2010/01/worlds-end-pub-camden.jpg' },
-    { Name: 'good bar', img: 'http://cdn.fluidlondon.co.uk/topten/19/best_camden_pubs_bars_guide_top_ten_london.jpg' },
-    { Name: 'Foo bar', img: 'http://www.fluidnetwork.co.uk/gfx/venues/22901/shaker_company_camden_london_cocktail_bar_01.jpg' }
-  ];*/
-
+  var cardTypes = bardata; 
   $scope.cards = Array.prototype.slice.call(cardTypes, 0, 0);
-
   $scope.cardSwiped = function(index) {
     $scope.addCard();
   };
 
-  $scope.cardDestroyed = function(index) {
-    $scope.cards.splice(index, 1);
-  };
+  console.log(cardTypes)
 
   $scope.addCard = function() {
     var newCard = cardTypes[Math.floor(Math.random() * cardTypes.length)];
@@ -75,28 +56,6 @@
     card.swipe();
   };
 });
-
-
-
-          var names =[]
-            for (i = 0; i < bardata.length; i++){
-            names.push(bardata[i].Name)
-          }; 
-          console.log(names)
-
-          var Locations =[]
-            for (i = 0; i < bardata.length; i++){
-            Locations.push(bardata[i].Location)
-          }; 
-          console.log(Locations)
-
-          var imgs =[]
-            for (i = 0; i < bardata.length; i++){
-            imgs.push(bardata[i].img)
-          }; 
-          console.log(imgs)
-
-
 </script>
 
     <ion-pane ng-controller="CardsCtrl">
@@ -119,24 +78,12 @@
             <div class="img">
               <img ng-src="{{card.img}}">
             </div>
+			<div class="Location">
+				{{card.Location}}
+			</div>
 
-            <!-- UNNECESSARY BUTTONS
-            <div class="button-bar">
-              <button class="button button-clear button-positive" ng-click="goAway()">Answer</button>
-              <button class="button button-clear button-positive" ng-click="goAway()">Decline</button>
-            </div>
-          </div>
-        </swipe-card>
-      </swipe-cards>
-    </ion-pane>
-            -->
+            
 
 
-    <!-- quick cache hack -->
-    <img src="http://static.designmynight.com/uploads/2013/03/the-cuban-camden-bar.jpg" style="display: none">
-    <img src="http://www.fluidnetwork.co.uk/gfx/venues/18964/grand-union-bar-camden-london-pub-burgers-beer-1.jpg" style="display: none">
-    <img src="http://www.ecenglish.com/blogs/London/wp-content/uploads/2010/01/worlds-end-pub-camden.jpg" style="display: none">
-    <img src="http://cdn.fluidlondon.co.uk/topten/19/best_camden_pubs_bars_guide_top_ten_london.jpg" style="display: none">
-    <img src="http://www.fluidnetwork.co.uk/gfx/venues/22901/shaker_company_camden_london_cocktail_bar_01.jpg" style="display: none">
-  </body>
+     </body>
 </html>
