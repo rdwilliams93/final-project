@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Place searches</title>
+    <title>Bartender Backend</title>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
     <style>
@@ -15,26 +15,9 @@
     <script>
 var map;
 var infowindow;
-var Latitude ='51.535118'; 
-var Longitude ='-0.139009';
-
-
-//Possible code for getting geolocation data
-//geocode start
-/*function onDeviceReady() {
-        navigator.geolocation.getCurrentPosition(onSuccess, onError);
-    }
-	
-function onSuccess(position) {
-        var Latitude = document.getElementById('geolocation');
-			return (position.coords.latitude);
-		var Longitude = document.getElementById('geolocation');
-			return (position.coords.longitude);
-};*/			
-//geo code end
 
 function initialize() {
-  var UserLocation = new google.maps.LatLng(Latitude, Longitude);
+  var UserLocation = new google.maps.LatLng(-33.882188, 151.207905); //This is where the location data goes in lat/long format
 
   map = new google.maps.Map(document.getElementById('map-canvas'), {
     center: UserLocation,
@@ -48,6 +31,7 @@ function initialize() {
   };
   
   infowindow = new google.maps.InfoWindow();
+  
   var service = new google.maps.places.PlacesService(map);
   service.nearbySearch(request, callback);
 }
@@ -56,7 +40,7 @@ function callback(results, status) {
   if (status == google.maps.places.PlacesServiceStatus.OK) {
     for (var i = 0; i < results.length; i++) {
       createMarker(results[i]);
-	  console.log(results[i]);
+	  console.log(results[i])
     }
   }
 }
