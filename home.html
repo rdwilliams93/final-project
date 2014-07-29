@@ -18,11 +18,7 @@
 
 <script type='text/javascript' src='localdata.js'></script>
 
-<!--script.js-->
   <script> 
-
-
-
 
     angular.module('starter', ['ionic', 'ionic.contrib.ui.cards'])
 
@@ -42,30 +38,27 @@
 
 
 .controller('CardsCtrl', function($scope, $ionicSwipeCardDelegate) {
- 
 
-  var cardTypes = bardata; /*[
-    
-    { Name: 'Shit bar', img: 'http://www.fluidnetwork.co.uk/gfx/venues/18964/grand-union-bar-camden-london-pub-burgers-beer-1.jpg' },
-    { Name: 'Even shitter bar?', img: 'http://www.ecenglish.com/blogs/London/wp-content/uploads/2010/01/worlds-end-pub-camden.jpg' },
-    { Name: 'good bar', img: 'http://cdn.fluidlondon.co.uk/topten/19/best_camden_pubs_bars_guide_top_ten_london.jpg' },
-    { Name: 'Foo bar', img: 'http://www.fluidnetwork.co.uk/gfx/venues/22901/shaker_company_camden_london_cocktail_bar_01.jpg' }
-  ];*/
 
+  var cardTypes = bardata; 
   $scope.cards = Array.prototype.slice.call(cardTypes, 0, 0);
+  $scope.index = 0;
 
   $scope.cardSwiped = function(index) {
     $scope.addCard();
   };
 
+
   $scope.cardDestroyed = function(index) {
     $scope.cards.splice(index, 1);
   };
 
+
   $scope.addCard = function() {
-    var newCard = cardTypes[Math.floor(Math.random() * cardTypes.length)];
-    newCard.id = Math.random();
-    $scope.cards.push(angular.extend({}, newCard));
+  ($scope.index < cardTypes.length) ? $scope.index ++ : $scope.index = 0;
+  var newCard = cardTypes[$scope.index];
+  //newCard.id = newCard;
+  $scope.cards.push(angular.extend({}, newCard));
   };
 })
 
@@ -75,41 +68,47 @@
     card.swipe();
   };
 });
-
-
-
 </script>
 
     <ion-pane ng-controller="CardsCtrl">
       <ion-header-bar class="bar-transparent">
-        <h1 class="Title">BARTENDER.</h1>
+      <!--page title here-->
+        <h1 class="Title"></h1>
       </ion-header-bar>
 
       <swipe-cards on-swipe="onSwipe($event)">
 
       <swipe-cards>
         <swipe-card on-swipe="cardSwiped()" id="start-card">
-          Swipe down for a new bar near you
+          Welcome to Bartender! 
+          <BR>Swipe down to find a new bar near you.
+           
         </swipe-card>
         <swipe-card ng-repeat="card in cards" on-destroy="cardDestroyed($index)" on-swipe="cardSwiped($index)">
 
-          <div ng-controller="CardCtrl">
+          <div ng-controller="CardCtrl" id="details">
             <div class="Name">
-              {{card.Name}}
+              <h4>{{card.Name}}</h4>
             </div>
-            <div class="img">
+
+            <div class="img" id="photo">
               <img ng-src="{{card.img}}">
             </div>
+            
             <div class = "Description">
-              {{card.Description}}
+              <h5>Description</h5> {{card.Description}} 
               </div>
+            
             <div class = "Location">
-            {{card.Location}}
+            <h5>Address</h5> {{card.Location}} 
             </div>
+            
             <div class = "Opening hours">
-            {{card['Opening hours']}}
+            <h5>Open</h5> {{card['Opening hours']}}
             </div>
           </div>
+
+
             <!-- UNNECESSARY BUTTONS
             <div class="button-bar">
               <button class="button button-clear button-positive" ng-click="goAway()">Answer</button>
