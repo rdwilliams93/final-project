@@ -47,8 +47,11 @@ body {
   background-color: rgb(255,255,255);
   border-radius: 4px;
   overflow: hidden;
-  
+  color: #444
+  font-size: 50px;
 }
+  
+
 
 .swipe-card .title {
   height: 40px;
@@ -64,8 +67,9 @@ body {
   border: none;
 }
 .img img {
-  width: 100%;
-  border-radius: 0px 0px 4px 4px;
+  width: 95%;
+  border-radius: 5px 5px 5px 5px;
+  horizontal-align: middle;
 }
 
 #start-card {
@@ -82,6 +86,15 @@ body {
   width: 200px;
   font-size: 30px;
   vertical-align: middle;
+}
+
+#details {
+  color: #fff;
+  background-color: #30BD8A;
+  line-height: 200%;
+  word-wrap: break-word;
+  border: 1px solid #4CD68E;
+  font-size: 10px;
 }
 
 #footer .button {
