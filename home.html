@@ -56,18 +56,19 @@ angular.module('starter', ['ionic', 'ionic.contrib.ui.cards'])
     card.swipe();
   };
 });
+
 </script>
 
     <ion-pane ng-controller="CardsCtrl">
       <ion-header-bar class="bar-transparent">
-        <h1 class="Title">Find a bar near you! Swipe down if you don't like what you see.</h1>
+        <h1 class="Title">BARTENDER.</h1>
       </ion-header-bar>
 
       <swipe-cards on-swipe="onSwipe($event)">
 
       <swipe-cards>
         <swipe-card on-swipe="cardSwiped()" id="start-card">
-          Swipe down for a new card
+          Swipe down for a new bar near you
         </swipe-card>
         <swipe-card ng-repeat="card in cards" on-destroy="cardDestroyed($index)" on-swipe="cardSwiped($index)">
 
@@ -78,6 +79,7 @@ angular.module('starter', ['ionic', 'ionic.contrib.ui.cards'])
             <div class="img">
               <img ng-src="{{card.img}}">
             </div>
+
 			<div class="Location">
 				{{card.Location}}
 			</div>
@@ -86,4 +88,35 @@ angular.module('starter', ['ionic', 'ionic.contrib.ui.cards'])
 
 
      </body>
+</html>
+
+            <div class = "Description">
+              {{card.Description}}
+              </div>
+            <div class = "Location">
+            {{card.Location}}
+            </div>
+            <div class = "Opening hours">
+            {{card['Opening hours']}}
+            </div>
+          </div>
+            <!-- UNNECESSARY BUTTONS
+            <div class="button-bar">
+              <button class="button button-clear button-positive" ng-click="goAway()">Answer</button>
+              <button class="button button-clear button-positive" ng-click="goAway()">Decline</button>
+            
+          </div>
+        </swipe-card>
+      </swipe-cards>
+    </ion-pane>
+            -->
+
+
+    <!-- quick cache hack -->
+    <img src="http://static.designmynight.com/uploads/2013/03/the-cuban-camden-bar.jpg" style="display: none">
+    <img src="http://www.fluidnetwork.co.uk/gfx/venues/18964/grand-union-bar-camden-london-pub-burgers-beer-1.jpg" style="display: none">
+    <img src="http://www.ecenglish.com/blogs/London/wp-content/uploads/2010/01/worlds-end-pub-camden.jpg" style="display: none">
+    <img src="http://cdn.fluidlondon.co.uk/topten/19/best_camden_pubs_bars_guide_top_ten_london.jpg" style="display: none">
+    <img src="http://www.fluidnetwork.co.uk/gfx/venues/22901/shaker_company_camden_london_cocktail_bar_01.jpg" style="display: none">
+  </body>
 </html>

@@ -58,4 +58,4 @@ var bardata = [
 	"img":"https://mw2.google.com/mw-panoramio/photos/small/3321076.jpg",
 	"Opening hours":"19:00-00:00",
 	"Description":"Intimate venue for jazz, soul, reggae and more from homegrown and international stars.",
-	}]
+	}];

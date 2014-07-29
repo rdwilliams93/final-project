@@ -1,0 +1,137 @@
+
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+
+		<link href="http://www.awwwards.com/bundles/tvawwwards/css/style.css" rel="stylesheet">
+		<link rel="shortcut icon" type="image/x-icon" href="http://www.awwwards.com/favicon.ico">
+		<link href="http://www.awwwards.com/bundles/tvawwwards/css/single-post.css" rel="stylesheet">
+		<link href="main.css" rel="stylesheet">
+
+		<title>TouchSwipe Gallery Demo</title>
+
+	</head>
+<body>
+
+
+<div class="wrapper localStyle">
+<div class="container">
+
+<ul class="listpost fontLocalStyle">
+<li>
+<h2>Simple image scroller demo</h2>
+
+<p>
+This simple example uses the swipe status to detect when the user is moving, but hasn't yet reached the swipe threshold.
+The images are dragged until the threshold is met, and then they are scrolled to the next image.
+If the swipe is not completed, the image snaps back to where it started.
+</p>
+</li>
+</ul>
+
+<h2>Swipe the images below left and right.</h2>
+<div id="galleryTouch">
+  <div id="imgs">
+    <img src="http://www.awwwards.com/awards/images/2013/02/touchswipe-img-1.png">
+    <img src="http://www.awwwards.com/awards/images/2013/02/touchswipe-img-2.png">
+    <img src="http://www.awwwards.com/awards/images/2013/02/touchswipe-img-3.png">
+  </div>
+</div>
+
+
+
+
+</div>
+</div>
+<!-- LOAD SCRIPTS -->
+
+<!-- Code -->
+<script src="http://www.awwwards.com/bundles/tvawwwards/js/rainbow-custom.min.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<script type="text/javascript" src="http://labs.skinkers.com/content/touchSwipe/jquery.touchSwipe.min.js"></script>
+
+
+<!-- Gallery -->
+<div class="container">
+<script>
+	$(function()
+	{
+		var IMG_WIDTH = 500,
+		currentImg=0,
+		maxImages=3;
+		speed=500,
+		imgs = $("#imgs")
+
+		//Init touch swipe
+		imgs.swipe( {
+			triggerOnTouchEnd : true,
+			swipeStatus : swipeStatus,
+			allowPageScroll:"vertical"
+		});
+
+		/**
+		* Catch each phase of the swipe.
+		* move : we drag the div.
+		* cancel : we animate back to where we were
+		* end : we animate to the next image
+		*/
+		function swipeStatus(event, phase, direction, distance, fingers)
+		{
+			//If we are moving before swipe, and we are going L or R, then manually drag the images
+			if( phase=="move" && (direction=="left" || direction=="right") )
+			{
+				var duration=0;
+
+				if (direction == "left")
+					scrollImages((IMG_WIDTH * currentImg) + distance, duration);
+
+				else if (direction == "right")
+					scrollImages((IMG_WIDTH * currentImg) - distance, duration);
+			}
+
+			//Else, cancel means snap back to the begining
+			else if ( phase == "cancel")
+			{
+				scrollImages(IMG_WIDTH * currentImg, speed);
+			}
+
+			//Else end means the swipe was completed, so move to the next image
+			else if ( phase =="end" )
+			{
+				if (direction == "right")
+					previousImage();
+				else if (direction == "left")
+					nextImage();
+			}
+		}
+
+		function previousImage()
+		{
+			currentImg = Math.max(currentImg-1, 0);
+			scrollImages( IMG_WIDTH * currentImg, speed);
+		}
+
+		function nextImage()
+		{
+			currentImg = Math.min(currentImg+1, maxImages-1);
+			scrollImages( IMG_WIDTH * currentImg, speed);
+		}
+
+		/**
+		 * Manually update the position of the imgs on drag
+		 */
+		function scrollImages(distance, duration)
+		{
+			imgs.css("-webkit-transition-duration", (duration/1000).toFixed(1) + "s");
+
+			//inverse the number we set in the css
+			var value = (distance<0 ? "" : "-") + Math.abs(distance).toString();
+
+			imgs.css("-webkit-transform", "translate3d("+value +"px,0px,0px)");
+		}
+	});
+</script>
+</div>
+</body>
+</html>

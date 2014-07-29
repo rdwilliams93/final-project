@@ -35,17 +35,19 @@ body {
   display: none;
   position: fixed;
   -webkit-transform: scale(1,1);
+  /*card position on page*/
   left: 50%;
-  top: 50%;
+  top: 35%;
+  /*card size*/
   width: 300px;
-  height: 300px;
+  height: 450px;
   margin-left: -150px;
   margin-top: -150px;
   box-sizing: border-box;
   background-color: rgb(255,255,255);
   border-radius: 4px;
   overflow: hidden;
-  -webkit-animation-fill-mode: forwards;
+  
 }
 
 .swipe-card .title {
@@ -56,12 +58,12 @@ body {
 }
 .swipe-card .image {
   overflow: hidden;
-  max-height: 210px;
+  max-height: 500px;
 }
 .swipe-card .button {
   border: none;
 }
-.swipe-card .image img {
+.img img {
   width: 100%;
   border-radius: 0px 0px 4px 4px;
 }
@@ -102,5 +104,5 @@ body {
   -webkit-transform: scale(0,0);
 }
 .swipe-card.pop-in {
-  -webkit-animation: bounceIn 0.3s ease-out;
+  -webkit-animation: bounceIn 0.2s ease-out;
 }
