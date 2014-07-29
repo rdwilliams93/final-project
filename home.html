@@ -19,18 +19,20 @@
 <script type='text/javascript' src='localdata.js'></script>
 
   <script> 
-<<<<<<< HEAD
-angular.module('starter', ['ionic', 'ionic.contrib.ui.cards'])
 
-    .directive('noScroll', function($document) {
-        return {
-            restrict: 'A',
-            link: function($scope, $element, $attr) {
-                $document.on('touchmove', function(e) {
-                    e.preventDefault();
-          });
-    }};
+    angular.module('starter', ['ionic', 'ionic.contrib.ui.cards'])
 
+.directive('noScroll', function($document) {
+
+  return {
+    restrict: 'A',
+    link: function($scope, $element, $attr) {
+
+      $document.on('touchmove', function(e) {
+        e.preventDefault();
+      });
+    }
+  };
 })
 
 
@@ -38,11 +40,9 @@ angular.module('starter', ['ionic', 'ionic.contrib.ui.cards'])
 .controller('CardsCtrl', function($scope, $ionicSwipeCardDelegate) {
 
 
-
   var cardTypes = bardata; 
   $scope.cards = Array.prototype.slice.call(cardTypes, 0, 0);
   $scope.index = 0;
-
 
   $scope.cardSwiped = function(index) {
     $scope.addCard();
@@ -52,7 +52,6 @@ angular.module('starter', ['ionic', 'ionic.contrib.ui.cards'])
   $scope.cardDestroyed = function(index) {
     $scope.cards.splice(index, 1);
   };
-
 
 
   $scope.addCard = function() {
@@ -69,10 +68,6 @@ angular.module('starter', ['ionic', 'ionic.contrib.ui.cards'])
     card.swipe();
   };
 });
-
-
-
-
 </script>
 
     <ion-pane ng-controller="CardsCtrl">
@@ -98,7 +93,7 @@ angular.module('starter', ['ionic', 'ionic.contrib.ui.cards'])
             <div class="img">
               <img ng-src="{{card.img}}">
             </div>
-
+            
             <div class = "Description">
               Description: {{card.Description}} 
               </div>
