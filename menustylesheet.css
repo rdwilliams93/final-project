@@ -75,8 +75,10 @@
 	}
 	
 	.header {
+		position: fixed;
 		padding: 15px;
 		background: #000;
+		top:1px;
 	}
 	.header .slideout-menu-toggle {
 		font-size: 1.2em;
