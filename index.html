@@ -2,36 +2,39 @@
 <html>
   <head>
     <title>Place searches</title>
-    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
-    <meta charset="utf-8">
+    <meta charset="utf-8"> 
+	
     <style>
       html, body, #map-canvas {
         height: 100%;
         margin: 0px;
-        padding: 0px
+        padding: 0px;
+		
       }
     </style>
+	<link href="http://code.ionicframework.com/1.0.0-beta.9/css/ionic.css" rel="stylesheet">
+    <script src="http://code.ionicframework.com/1.0.0-beta.9/js/ionic.bundle.js">
+    </script>
+    
+    <script src="http://code.ionicframework.com/contrib/ionic-contrib-swipecards/ionic.swipecards.js?3"></script>
+    <link rel="stylesheet" type="text/css" href="css.css" media="screen" />
+
+</head>
+
+
+<body ng-app="starter" class="slide-left-right-ios7" no-scroll>
+
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places"></script>
     <script>
+
 var map;
 var infowindow;
+
+
 var Latitude ='51.535118'; 
 var Longitude ='-0.139009';
+var bardata = [];
 
-
-//Possible code for getting geolocation data
-//geocode start
-/*function onDeviceReady() {
-        navigator.geolocation.getCurrentPosition(onSuccess, onError);
-    }
-	
-function onSuccess(position) {
-        var Latitude = document.getElementById('geolocation');
-			return (position.coords.latitude);
-		var Longitude = document.getElementById('geolocation');
-			return (position.coords.longitude);
-};*/			
-//geo code end
 
 function initialize() {
   var UserLocation = new google.maps.LatLng(Latitude, Longitude);
@@ -49,36 +52,150 @@ function initialize() {
   
   infowindow = new google.maps.InfoWindow();
   var service = new google.maps.places.PlacesService(map);
-  service.nearbySearch(request, callback);
+  service.nearbySearch(request, getcards);
 }
 
-function callback(results, status) {
-  if (status == google.maps.places.PlacesServiceStatus.OK) {
-    for (var i = 0; i < results.length; i++) {
-      createMarker(results[i]);
-	  console.log(results[i]);
-    }
+function getcards(results, status) {
+	 if (status == google.maps.places.PlacesServiceStatus.OK) {
+		for (var i = 0; i < results.length; i++) { 
+			
+			bardata.push(results[i]);
+		}
+	 //console.log(bardata);
+   return bardata;
   }
+
 }
 
-function createMarker(place) {
-  var placeLoc = place.geometry.location;
-  var marker = new google.maps.Marker({
+var bardata = [getcards];
+console.log(bardata);
+
+
+
+function createPhotoMarker() {
+  var photos = cards.photos;
+  if (!photos) {
+    return;
+  }
+
+	var marker = new google.maps.Marker({
     map: map,
-    position: place.geometry.location
-  });
+    position: cards.geometry.location,
+    title: cards.name,
+    icon: cards.photos[0].getUrl({'maxWidth': 35, 'maxHeight': 35})
+  })();
+	foo.push[marker]
+  }  
 
-  google.maps.event.addListener(marker, 'click', function() {
-    infowindow.setContent(place.name);
-    infowindow.open(map, this);
-  });
-}
+var foo =[createPhotoMarker];
+console.log(foo);
 
-google.maps.event.addDomListener(window, 'load', initialize);
+google.maps.event.addDomListener(window, "load", initialize);
+
+
+//Swipe card JS  
+
+
+angular.module('starter', ['ionic', 'ionic.contrib.ui.cards'])
+	
+	
+.directive('noScroll', function($document) {
+	
+  return {
+    restrict: 'A',
+    link: function($scope, $element, $attr) {
+
+      $document.on('touchmove', function(e) {
+        e.preventDefault();
+      });
+    }
+  };
+})
+
+
+
+.controller('CardsCtrl', function($scope, $ionicSwipeCardDelegate) {
+
+
+  var cardTypes = bardata; 
+  $scope.cards = Array.prototype.slice.call(cardTypes, 0, 0);
+  $scope.index = 1;
+
+  $scope.cardSwiped = function(index) {
+    $scope.addCard();
+  };
+
+
+  $scope.cardDestroyed = function(index) {
+    $scope.cards.splice(index, 1);
+  };
+
+
+  $scope.addCard = function() {
+  ($scope.index < cardTypes.length) ? $scope.index ++ : $scope.index = 0;
+  var newCard = cardTypes[$scope.index];
+  //newCard.id = newCard;
+  $scope.cards.push(angular.extend({}, newCard));
+  };
+})
+
+.controller('CardCtrl', function($scope, $ionicSwipeCardDelegate) {
+  $scope.goAway = function() {
+    var card = $ionicSwipeCardDelegate.getSwipebleCard($scope);
+    card.swipe();
+  };
+  
+});
+
 
     </script>
-  </head>
-  <body>
-    <div id="map-canvas"></div>
+   
+              <div class="img" id="map-canvas"></div>
+            
+  
+      <ion-pane ng-controller="CardsCtrl">
+      <ion-header-bar class="bar-transparent">
+      <!--page title here-->
+        <h1 class="Title"></h1>
+      </ion-header-bar>
+
+      <swipe-cards on-swipe="onSwipe($event)">
+
+      <swipe-cards>
+        <swipe-card on-swipe="cardSwiped()" id="start-card">
+          Welcome to Bartender! 
+          Swipe down to find a new bar near you.
+           
+        </swipe-card>
+        <swipe-card ng-repeat="card in cards" on-destroy="cardDestroyed($index)" on-swipe="cardSwiped($index)">
+
+          <div ng-controller="CardCtrl" id="details">
+            <div class="Name">
+              <h4>{{card.name}}</h4>
+            </div>
+
+           
+			<div class="img" id="photo">
+              <img ng-src="{{card.icon}}">
+            </div>
+            
+            
+            
+            
+            <div class = "Description">
+              <h5>Description</h5> {{card.rating}} 
+              </div>
+            
+            <div class = "Location">
+            <h5>Address</h5> {{card.vicinity}} 
+            </div>
+            
+            <div class = "Opening hours">
+            <h5>Open. True or False?</h5> {{card.opening_hours.open_now}}
+            </div>
+          </div>
+
+   
   </body>
+  
 </html>

@@ -16,11 +16,14 @@
   </head>
   <body ng-app="starter" class="slide-left-right-ios7" no-scroll>
 
-<script type='text/javascript' src='localdata.js'></script>
-
+<!--<script type='text/javascript' src='localdata.js'></script>-->
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places"></script>
+   
   <script> 
+var bardata = [];
 
-    angular.module('starter', ['ionic', 'ionic.contrib.ui.cards'])
+//Swipe card JS  
+angular.module('starter', ['ionic', 'ionic.contrib.ui.cards'])
 
 .directive('noScroll', function($document) {
 
@@ -68,8 +71,9 @@
     card.swipe();
   };
 });
-</script>
 
+</script>
+<body>
     <ion-pane ng-controller="CardsCtrl">
       <ion-header-bar class="bar-transparent">
       <!--page title here-->
@@ -108,24 +112,10 @@
             </div>
           </div>
 
-
-            <!-- UNNECESSARY BUTTONS
-            <div class="button-bar">
-              <button class="button button-clear button-positive" ng-click="goAway()">Answer</button>
-              <button class="button button-clear button-positive" ng-click="goAway()">Decline</button>
+		<div id="map-canvas"></div>
             
-          </div>
-        </swipe-card>
-      </swipe-cards>
-    </ion-pane>
-            -->
 
 
-    <!-- quick cache hack -->
-    <img src="http://static.designmynight.com/uploads/2013/03/the-cuban-camden-bar.jpg" style="display: none">
-    <img src="http://www.fluidnetwork.co.uk/gfx/venues/18964/grand-union-bar-camden-london-pub-burgers-beer-1.jpg" style="display: none">
-    <img src="http://www.ecenglish.com/blogs/London/wp-content/uploads/2010/01/worlds-end-pub-camden.jpg" style="display: none">
-    <img src="http://cdn.fluidlondon.co.uk/topten/19/best_camden_pubs_bars_guide_top_ten_london.jpg" style="display: none">
-    <img src="http://www.fluidnetwork.co.uk/gfx/venues/22901/shaker_company_camden_london_cocktail_bar_01.jpg" style="display: none">
+   
   </body>
 </html>
