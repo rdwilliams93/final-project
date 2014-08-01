@@ -29,7 +29,6 @@
 
 var map;
 var infowindow;
-<<<<<<< HEAD
 
 
 var Latitude ='51.535118'; 
@@ -37,15 +36,6 @@ var Longitude ='-0.139009';
 var bardata = [];
 
 
-=======
-
-
-var Latitude ='54.596112'; 
-var Longitude ='-5.928001';
-var bardata = [];
-
-
->>>>>>> f85c7f400f8f40c2a2a1814ac382f542d5ffae32
 function initialize() {
   var UserLocation = new google.maps.LatLng(Latitude, Longitude);
 
@@ -56,7 +46,7 @@ function initialize() {
 
   var request = {
     location: UserLocation,
-    radius: 500,
+    radius: 500, 
     types: ['bar']
   };
   
@@ -76,10 +66,7 @@ function getcards(results, status) {
   }
 
 }
-var bardata = [getcards];
-console.log(bardata);
 
-<<<<<<< HEAD
 var bardata = [getcards];
 console.log(bardata);
 
@@ -102,11 +89,6 @@ function createPhotoMarker() {
 
 var foo =[createPhotoMarker];
 console.log(foo);
-=======
-  
-
-//console.log(bardata);
->>>>>>> f85c7f400f8f40c2a2a1814ac382f542d5ffae32
 
 google.maps.event.addDomListener(window, "load", initialize);
 
@@ -137,11 +119,7 @@ angular.module('starter', ['ionic', 'ionic.contrib.ui.cards'])
 
   var cardTypes = bardata; 
   $scope.cards = Array.prototype.slice.call(cardTypes, 0, 0);
-<<<<<<< HEAD
   $scope.index = 1;
-=======
-  $scope.index = 0;
->>>>>>> f85c7f400f8f40c2a2a1814ac382f542d5ffae32
 
   $scope.cardSwiped = function(index) {
     $scope.addCard();
@@ -166,10 +144,7 @@ angular.module('starter', ['ionic', 'ionic.contrib.ui.cards'])
     var card = $ionicSwipeCardDelegate.getSwipebleCard($scope);
     card.swipe();
   };
-<<<<<<< HEAD
   
-=======
->>>>>>> f85c7f400f8f40c2a2a1814ac382f542d5ffae32
 });
 
 
@@ -200,13 +175,8 @@ angular.module('starter', ['ionic', 'ionic.contrib.ui.cards'])
             </div>
 
            
-<<<<<<< HEAD
 			<div class="img" id="photo">
               <img ng-src="{{card.icon}}">
-=======
-			        <div class="img" id="photo">
-              <img ng-src="{{card.photos.object.getUrl}}">
->>>>>>> f85c7f400f8f40c2a2a1814ac382f542d5ffae32
             </div>
             
             
@@ -221,11 +191,7 @@ angular.module('starter', ['ionic', 'ionic.contrib.ui.cards'])
             </div>
             
             <div class = "Opening hours">
-<<<<<<< HEAD
             <h5>Open. True or False?</h5> {{card.opening_hours.open_now}}
-=======
-            <h5>Open</h5> {{card.opening_hours}}
->>>>>>> f85c7f400f8f40c2a2a1814ac382f542d5ffae32
             </div>
           </div>
 
