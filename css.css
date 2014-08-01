@@ -78,10 +78,10 @@ body {
 
 #start-card {
   color: #fff;
-  background-color: #30BD8A;
+  background-color: #8856a7;
   line-height: 300px;
   word-wrap: break-word;
-  border: 6px solid #4CD68E;
+  border: 6px solid #9ebcda;
   text-align: center;
 }
 #start-card span {
@@ -94,23 +94,25 @@ body {
 
 #details {
   color: #fff;
-  background-color: #30BD8A;
+  background-color: #8856a7;
   line-height: 100%;
   word-wrap: break-word;
-  border: 1px solid #4CD68E;
-  font-size: 10px;
+  border: 1px solid #9ebcda;
+  font-size: 20px;
   vertical-align: middle;
   margin-left: auto;
   margin-right: auto;
   padding: 5px;
-  border: 6px solid #4CD68E;
+  border: 6px solid #9ebcda;
   width: 300px;
   height: 450px;
   text-align: center;
 
 }
 
-
+h4 {
+ color: #FFF;
+}
 
 #footer .button {
   color: #fff;
