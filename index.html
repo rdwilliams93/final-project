@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Place searches</title>
+    <title>Bartender</title>
     <meta charset="utf-8"> 
 	
     <style>
@@ -62,12 +62,25 @@ function getcards(results, status) {
 		for (var i = 0; i < results.length; i++) { 
 			if (results[i].photos){
 				results[i].url = results[i].photos[0].getUrl({'maxWidth': 200, 'maxHeight': 200});
+			} else {
+				results[i].url = "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcTGqndryRsj2BUc1si0_ZQzkUfR9H5HPa1XWrwFdtT_5patJmgztVnE4Q"
 			};
-			var open = results[i].opening_hours.open_now;
-			(open) ? results[i].status = "Open Now!" : results[i].status = "Closed";
+			var open = results[i].opening_hours ;
+			
+			if (open) {
+						var openNow = open.open_now;
+							(openNow) ? results[i].status = "Open Now!" : results[i].status = "Closed";
+					} else { 
+						results[i].status = "Unknown";
+						};
+			var rating = results[i].rating;
+			(rating) ? results[i].rating = results[i].rating : results[i].rating = "N/A" ;
+			
+			
 			bardata.push(results[i]);
-		}
-	console.log(bardata);
+			console.log(results[i]);	
+	}
+	
    return bardata;
   
   };
@@ -112,7 +125,7 @@ angular.module('starter', ['ionic', 'ionic.contrib.ui.cards'])
 
 
   $scope.cardDestroyed = function(index) {
-    $scope.cards.splice(index, 1);
+    $scope.cards.splice(index, 0);
   };
 
 
